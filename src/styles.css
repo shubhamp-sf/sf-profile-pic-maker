@@ -1,18 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root{
-    --sf-red: #f30100;
-    --sf-white: #ffffff;
+:root {
+  --sf-red: #f30100;
+  --sf-white: #ffffff;
+  --sf-font: "Montserrat", sans-serif;
 }
-body{
-    font-family: "Work Sans", sans-serif;
-    padding: 0;
-    margin: 0;
-    background: #0d1117;
+body {
+  font-family: "Work Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+  background: #0d1117;
+  color: #d6d6d6;
 }
-.sf-red{
-    color: var(--sf-red);
+.sf-red {
+  color: var(--sf-red);
 }
-.sf-white{
-    color: var(--sf-white);
+.sf-white {
+  color: var(--sf-white);
+}
+.brand-font {
+  font-family: var(--sf-font);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+.light {
+  font-weight: lighter;
+}
+button {
+  cursor: pointer;
 }

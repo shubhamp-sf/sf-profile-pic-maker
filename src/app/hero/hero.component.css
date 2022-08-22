@@ -1,0 +1,26 @@
+.hero {
+  padding: 2rem;
+  padding-top: 4rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+.hero .left h1 {
+  margin-bottom: 2rem;
+}
+.hero .right {
+  text-align: center;
+}
+.hero .right img {
+  width: 70%;
+}
+button.hero-primary {
+  font-size: 1rem;
+  background: #0366d6;
+  border: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+}
