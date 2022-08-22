@@ -1,0 +1,21 @@
+.text-logo{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1.85rem;
+}
+header{
+    padding: 1rem 2rem;
+    background-color: #1e232c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.app-title{
+    color: white;
+    font-size: 1.15rem;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
