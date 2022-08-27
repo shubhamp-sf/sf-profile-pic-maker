@@ -3,6 +3,7 @@
 :root {
   --sf-red: #f30100;
   --sf-white: #ffffff;
+  --sf-black: #031842;
   --sf-font: "Montserrat", sans-serif;
 }
 body {
@@ -39,4 +40,7 @@ button {
 }
 a {
   text-decoration: none;
+}
+.ngx-toastr {
+  box-shadow: none !important;
 }

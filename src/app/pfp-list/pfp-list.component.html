@@ -1,0 +1,42 @@
+<app-container>
+	<div class="wrapper">
+		<ng-container *ngIf="upload.status === upload.UploadStatus.PROCESSING">
+			<h1>Generating Profile Pictures...</h1>
+			<div class="spinner">
+				<span class="whirly-loader">Loading...</span>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="upload.status === upload.UploadStatus.COMPLETE">
+			<h1>Ready!</h1>
+			<div class="pfp-list">
+				<div
+					*ngFor="let template of templates"
+					class="template {{ template.class }}"
+				>
+					<img
+						class="bg"
+						src="/assets/pfp-bg/{{ template.bg }}"
+						draggable="false"
+						alt="background"
+					/>
+					<div class="user-image" [ngStyle]="template.styles">
+						<img
+							[src]="upload.imageURL"
+							alt="user"
+							draggable="false"
+						/>
+					</div>
+
+					<button class="download-button">
+						<img
+							src="/assets/download.svg"
+							width="36"
+							height="36"
+						/>
+					</button>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+</app-container>
