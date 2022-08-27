@@ -1,2 +1,7 @@
 <app-header></app-header>
-<app-hero></app-hero>
+<app-hero *ngIf="upload.status === upload.UploadStatus.INITIAL"></app-hero>
+<app-image-picker (onImageReady)="onImageReady($event)"></app-image-picker>
+<app-pfp-list
+	[image]="upload.imageURL"
+	*ngIf="upload.status !== upload.UploadStatus.INITIAL"
+></app-pfp-list>

@@ -1,0 +1,11 @@
+button.big-primary {
+  display: flex;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  background: #0366d6;
+  border: 2px solid #1777e6;
+  border-radius: 10px;
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  padding: 1rem 1.5rem;
+}
