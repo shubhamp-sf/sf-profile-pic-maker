@@ -46,14 +46,31 @@ export class RenderPFPService {
 			});
 		});
 	}
-	getBlobURL(fetchURL: string) {
+	getBlobURL(
+		fetchURL: string,
+		as: 'OBJECT_URL' | 'BASE64_URL' = 'OBJECT_URL'
+	) {
 		return new Promise((resolve: (url: string) => void, reject) => {
 			fetch(fetchURL)
 				.then((e) => e.blob())
-				.then((blob) => {
-					resolve(URL.createObjectURL(blob));
+				.then(async (blob) => {
+					if (as === 'BASE64_URL') {
+						resolve(await this.blobToBase64(blob));
+					} else if (as === 'OBJECT_URL') {
+						resolve(this.blobToObjectURL(blob));
+					}
 				})
 				.catch(reject);
+		});
+	}
+	blobToObjectURL(blob: Blob) {
+		return URL.createObjectURL(blob);
+	}
+	blobToBase64(blob: Blob) {
+		return new Promise((resolve: (base64URL: string) => void, _) => {
+			const reader = new FileReader();
+			reader.onloadend = () => resolve(reader.result as string);
+			reader.readAsDataURL(blob);
 		});
 	}
 	renderImage(

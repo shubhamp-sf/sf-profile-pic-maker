@@ -3,48 +3,52 @@
 		<ng-container *ngIf="upload.status === upload.UploadStatus.PROCESSING">
 			<h1>Generating Profile Pictures...</h1>
 			<div class="spinner">
-				<span class="whirly-loader">Loading...</span>
+				<span class="wobblebar-loader">Loading...</span>
 			</div>
 		</ng-container>
 
-		<ng-container *ngIf="upload.status === upload.UploadStatus.COMPLETE">
-			<h1>Ready!</h1>
-			<div class="pfp-list">
+		<h1 *ngIf="upload.status === upload.UploadStatus.COMPLETE">Ready!</h1>
+		<div
+			class="pfp-list {{
+				upload.status === upload.UploadStatus.COMPLETE ? '' : 'hidden'
+			}}"
+		>
+			<div
+				*ngFor="let template of templates"
+				class="template {{ template.key }}"
+			>
+				<img
+					class="bg"
+					[src]="template.bg"
+					draggable="false"
+					alt="background"
+					loading="eager"
+				/>
 				<div
-					*ngFor="let template of templates"
-					class="template {{ template.key }}"
+					class="user-image"
+					[ngStyle]="getUserImageStyles(template.position)"
 				>
 					<img
-						class="bg"
-						[src]="template.bg"
+						*ngIf="!!upload.imageURL"
+						[src]="upload.imageURL"
+						alt="user"
 						draggable="false"
-						alt="background"
 					/>
-					<div
-						class="user-image"
-						[ngStyle]="getUserImageStyles(template.position)"
+				</div>
+				<div class="download-button-wrapper">
+					<button
+						class="download-button"
+						(click)="download(template)"
 					>
 						<img
-							[src]="upload.imageURL"
-							alt="user"
+							src="/assets/download.svg"
+							width="36"
+							height="36"
 							draggable="false"
 						/>
-					</div>
-					<div class="download-button-wrapper">
-						<button
-							class="download-button"
-							(click)="download(template)"
-						>
-							<img
-								src="/assets/download.svg"
-								width="36"
-								height="36"
-								draggable="false"
-							/>
-						</button>
-					</div>
+					</button>
 				</div>
 			</div>
-		</ng-container>
+		</div>
 	</div>
 </app-container>

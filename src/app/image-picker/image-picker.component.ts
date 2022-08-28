@@ -4,6 +4,7 @@ import { ImgurService } from '../imgur.service';
 import { UploadService, UploadStatus } from '../upload.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
+import { RenderPFPService } from '../render-pfp.service';
 
 @Component({
 	selector: 'app-image-picker',
@@ -21,7 +22,8 @@ export class ImagePickerComponent implements OnInit {
 		public upload: UploadService,
 		private imgur: ImgurService,
 		private bgRemove: BgRemoveService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private renderService: RenderPFPService
 	) {}
 	ngOnInit(): void {}
 
@@ -81,19 +83,24 @@ export class ImagePickerComponent implements OnInit {
 					value.data.link,
 					'image/png',
 					(url: string) => {
-						// onComplete -> hide spinner and delete uploaded image
-
-						this.setStatus(UploadStatus.COMPLETE);
-
-						this.imgur.delete(value.data.deletehash).subscribe();
+						// onComplete -> delete uploaded image
 
 						this.imgur.upload(url).subscribe({
 							next: (uploadResponse) => {
-								this.onImageReady.emit(
-									uploadResponse.data.link
-								);
+								this.renderService
+									.getBlobURL(
+										uploadResponse.data.link,
+										'BASE64_URL'
+									)
+									.then((url) => {
+										this.onImageReady.emit(url);
+									})
+									.finally(() => {
+										this.setStatus(UploadStatus.COMPLETE);
+									});
 							},
 						});
+						this.imgur.delete(value.data.deletehash).subscribe();
 					}
 				);
 			},

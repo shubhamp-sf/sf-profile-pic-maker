@@ -21,6 +21,9 @@ h1 {
 	justify-content: center;
 	width: 100%;
 }
+.pfp-list.hidden {
+	display: none;
+}
 @media (max-width: 1170px) {
 	.pfp-list {
 		grid-template-columns: repeat(2, 300px);
