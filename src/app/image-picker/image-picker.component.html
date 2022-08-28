@@ -5,3 +5,22 @@
 >
 	Pick Your Photo
 </button>
+
+<ng-container *ngIf="imageFile !== null">
+	<div class="image-cropper-popup" (click)="closePopup($event)">
+		<div class="image-cropper-wrapper">
+			<image-cropper
+				[imageFile]="imageFile"
+				[maintainAspectRatio]="true"
+				[aspectRatio]="1 / 1"
+				format="png"
+				[resizeToWidth]="1080"
+				[resizeToHeight]="1080"
+				(imageCropped)="imageCropped($event)"
+			></image-cropper>
+			<button [disabled]="this.croppedImage === null" (click)="proceed()">
+				Proceed
+			</button>
+		</div>
+	</div>
+</ng-container>

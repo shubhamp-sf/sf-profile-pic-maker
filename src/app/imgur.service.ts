@@ -22,7 +22,15 @@ export class ImgurService {
 		// prepare body
 		let formData = new FormData();
 		if (typeof image === 'string') {
-			formData.append('type', 'url');
+			let type: 'url' | 'base64' = image.startsWith('http')
+				? 'url'
+				: 'base64';
+
+			if (type === 'base64') {
+				image = image.replace('data:image/png;base64,', '');
+			}
+
+			formData.append('type', type);
 			formData.append('image', image);
 		} else {
 			formData.append('image', image, image.name);
@@ -45,9 +53,17 @@ export class ImgurService {
 	}
 
 	private handleError = (response: HttpErrorResponse) => {
+		console.log(response);
 		let rawResponse = response.error as ImgurErrorResponse;
 		let errorString =
 			rawResponse?.data?.error || 'Something went wrong with Imgur.';
+
+		if (typeof errorString !== 'string') {
+			errorString = JSON.stringify(errorString);
+		}
+		if (errorString.length > 80) {
+			errorString = errorString.slice(0, 80).concat('...');
+		}
 		this.notify.error(errorString);
 		return throwError(() => new Error(errorString));
 	};
