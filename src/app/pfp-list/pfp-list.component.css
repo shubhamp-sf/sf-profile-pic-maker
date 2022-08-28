@@ -1,9 +1,10 @@
 h1 {
 	text-align: center;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 .wrapper {
-	padding-top: 2rem;
+	padding-top: 3rem;
+	padding-bottom: 4rem;
 	display: grid;
 	gap: 1rem;
 }
@@ -53,21 +54,23 @@ h1 {
 	width: 100%;
 }
 
+.pfp-list .template .download-button-wrapper {
+	position: absolute;
+	bottom: 3%;
+	right: 3%;
+	transition: 0.3s;
+	transform: translateX(80%);
+	opacity: 0;
+}
+.pfp-list .template:hover .download-button-wrapper {
+	transform: translateX(0%);
+	opacity: 1;
+}
+
 button.download-button {
 	display: flex;
 	padding: 0.5rem;
 	border-radius: 5px;
 	background: #0366d6;
 	border: 2px solid #1777e6;
-	position: absolute;
-	bottom: 3%;
-	right: 3%;
-	transform: translateX(80%);
-	opacity: 0;
-	transition: 0.3s;
-}
-
-.pfp-list .template:hover button.download-button {
-	transform: translateX(0%);
-	opacity: 1;
 }
