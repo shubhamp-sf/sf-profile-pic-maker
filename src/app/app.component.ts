@@ -12,6 +12,5 @@ export class AppComponent {
 
 	onImageReady(url: string) {
 		this.upload.imageURL = url;
-		console.log('handleImage', this.upload.imageURL);
 	}
 }

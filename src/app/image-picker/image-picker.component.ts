@@ -15,7 +15,7 @@ import { UploadService, UploadStatus } from '../upload.service';
 	templateUrl: './image-picker.component.html',
 	styleUrls: ['./image-picker.component.css'],
 })
-export class ImagePickerComponent implements OnInit, OnChanges {
+export class ImagePickerComponent implements OnInit {
 	imageFile: File | null = null;
 	statusCheckInterval = 2500;
 
@@ -27,9 +27,6 @@ export class ImagePickerComponent implements OnInit, OnChanges {
 		private bgRemove: BgRemoveService
 	) {}
 	ngOnInit(): void {}
-	ngOnChanges(changes: SimpleChanges): void {
-		console.log('changes', changes);
-	}
 
 	handleUploadClick() {
 		const fileInput = document.createElement('input');

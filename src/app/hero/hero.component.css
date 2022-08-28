@@ -1,6 +1,6 @@
 .hero {
 	padding: 2rem;
-	padding-top: 10rem;
+	padding-top: 10vh;
 	display: grid;
 	gap: 1rem;
 }

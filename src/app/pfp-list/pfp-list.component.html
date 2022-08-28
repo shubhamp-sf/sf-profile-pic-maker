@@ -12,29 +12,37 @@
 			<div class="pfp-list">
 				<div
 					*ngFor="let template of templates"
-					class="template {{ template.class }}"
+					class="template {{ template.key }}"
 				>
 					<img
 						class="bg"
-						src="/assets/pfp-bg/{{ template.bg }}"
+						[src]="template.bg"
 						draggable="false"
 						alt="background"
 					/>
-					<div class="user-image" [ngStyle]="template.styles">
+					<div
+						class="user-image"
+						[ngStyle]="getUserImageStyles(template.position)"
+					>
 						<img
 							[src]="upload.imageURL"
 							alt="user"
 							draggable="false"
 						/>
 					</div>
-
-					<button class="download-button">
-						<img
-							src="/assets/download.svg"
-							width="36"
-							height="36"
-						/>
-					</button>
+					<div class="download-button-wrapper">
+						<button
+							class="download-button"
+							(click)="download(template)"
+						>
+							<img
+								src="/assets/download.svg"
+								width="36"
+								height="36"
+								draggable="false"
+							/>
+						</button>
+					</div>
 				</div>
 			</div>
 		</ng-container>
