@@ -19,6 +19,7 @@
 				[resizeToWidth]="1080"
 				[resizeToHeight]="1080"
 				(imageCropped)="imageCropped($event)"
+				(loadImageFailed)="cropperError($event)"
 			></image-cropper>
 			<button [disabled]="this.croppedImage === null" (click)="proceed()">
 				Proceed

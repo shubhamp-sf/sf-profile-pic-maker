@@ -34,7 +34,18 @@ export class ImagePickerComponent implements OnInit {
 			let files = fileInput.files;
 
 			if (files && files.length > 0) {
-				this.loadCropper(files[0]);
+				let file = files[0];
+				console.debug(file);
+
+				if (file.size === 0) {
+					this.toastr.error(
+						'Selected file seems to be corrupted.',
+						'File Size is 0 bytes.'
+					);
+					return;
+				}
+
+				this.loadCropper(file);
 			}
 		});
 		fileInput.click();
@@ -134,5 +145,13 @@ export class ImagePickerComponent implements OnInit {
 	// cropper properties
 	imageCropped(event: ImageCroppedEvent) {
 		this.croppedImage = event.base64 ?? null;
+	}
+	cropperError(error: any) {
+		console.debug('cropperError', error);
+		this.imageFile = null;
+		this.toastr.error(
+			'While loading selected image, please try different image.',
+			'An Error Occurred.'
+		);
 	}
 }
