@@ -1,28 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --sf-red: #f30100;
-  --sf-white: #ffffff;
-  --sf-black: #031842;
-  --sf-font: "Montserrat", sans-serif;
+	--sf-red: #f30100;
+	--sf-white: #ffffff;
+	--sf-black: #031842;
+	--sf-font: "Montserrat", sans-serif;
 }
 body {
-  font-family: "Work Sans", sans-serif;
-  padding: 0;
-  margin: 0;
-  background-color: #0d1117;
-  background-image: url(./assets/bg.jpg);
-  background-size: cover;
-  color: #d6d6d6;
+	font-family: "Work Sans", sans-serif;
+	padding: 0;
+	margin: 0;
+	background-color: #0d1117;
+	background-image: url(./assets/bg.jpg);
+	background-size: cover;
+	color: #d6d6d6;
 }
 .sf-red {
-  color: var(--sf-red);
+	color: var(--sf-red);
 }
 .sf-white {
-  color: var(--sf-white);
+	color: var(--sf-white);
 }
 .brand-font {
-  font-family: var(--sf-font);
+	font-family: var(--sf-font);
 }
 h1,
 h2,
@@ -30,17 +30,39 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
+	margin: 0;
 }
 .light {
-  font-weight: lighter;
+	font-weight: lighter;
 }
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 .ngx-toastr {
-  box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.ngx-ic-source-image {
+	background-color: white;
+	background-image: linear-gradient(
+			45deg,
+			rgb(239, 239, 239) 25%,
+			rgba(239, 239, 239, 0) 25%,
+			rgba(239, 239, 239, 0) 75%,
+			rgb(239, 239, 239) 75%,
+			rgb(239, 239, 239)
+		),
+		linear-gradient(
+			45deg,
+			rgb(239, 239, 239) 25%,
+			rgba(239, 239, 239, 0) 25%,
+			rgba(239, 239, 239, 0) 75%,
+			rgb(239, 239, 239) 75%,
+			rgb(239, 239, 239)
+		);
+	background-position: 0px 0px, 10px 10px;
+	background-size: 21px 21px;
 }

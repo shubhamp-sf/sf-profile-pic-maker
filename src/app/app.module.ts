@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { PFPListComponent } from './pfp-list/pfp-list.component';
 import { ImagePickerComponent } from './image-picker/image-picker.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,7 @@ import { ImagePickerComponent } from './image-picker/image-picker.component';
 		AppRoutingModule,
 		HttpClientModule,
 		ToastrModule.forRoot(),
+		ImageCropperModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

@@ -1,14 +1,9 @@
-import {
-	EventEmitter,
-	Component,
-	OnInit,
-	Output,
-	OnChanges,
-	SimpleChanges,
-} from '@angular/core';
+import { EventEmitter, Component, OnInit, Output } from '@angular/core';
 import { BgRemoveService } from '../bg-remove.service';
 import { ImgurService } from '../imgur.service';
 import { UploadService, UploadStatus } from '../upload.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-image-picker',
@@ -18,13 +13,15 @@ import { UploadService, UploadStatus } from '../upload.service';
 export class ImagePickerComponent implements OnInit {
 	imageFile: File | null = null;
 	statusCheckInterval = 2500;
+	croppedImage: string | null = null;
 
 	@Output() onImageReady = new EventEmitter<string>();
 
 	constructor(
 		public upload: UploadService,
 		private imgur: ImgurService,
-		private bgRemove: BgRemoveService
+		private bgRemove: BgRemoveService,
+		private toastr: ToastrService
 	) {}
 	ngOnInit(): void {}
 
@@ -37,23 +34,41 @@ export class ImagePickerComponent implements OnInit {
 			let files = fileInput.files;
 
 			if (files && files.length > 0) {
-				this.uploadImage(files[0]);
+				this.loadCropper(files[0]);
 			}
 		});
 		fileInput.click();
 	}
+	private loadCropper(imageFile: File) {
+		this.imageFile = imageFile;
+	}
+	closePopup(event: MouseEvent) {
+		if (
+			(event.currentTarget as HTMLDivElement).isSameNode(
+				event.target as Node
+			)
+		) {
+			// clicked on backdrop
+			this.imageFile = null;
+		}
+	}
+	proceed() {
+		let base64 = this.croppedImage;
+		if (base64) {
+			this.uploadImage(base64);
+			this.imageFile = null;
+		}
+	}
 
-	private uploadImage(image: File) {
-		this.imageFile = image;
-
+	private uploadImage(base64: string) {
 		// upload to imgur
 		this.setStatus(UploadStatus.PROCESSING);
 
-		this.imgur.upload(this.imageFile).subscribe({
+		this.imgur.upload(base64).subscribe({
 			next: (value) => {
 				this.removeBackground(
 					value.data.link,
-					this.imageFile!.type,
+					'image/png',
 					(url: string) => {
 						// onComplete -> hide spinner and delete uploaded image
 
@@ -114,5 +129,10 @@ export class ImagePickerComponent implements OnInit {
 	};
 	setStatus(status: UploadStatus) {
 		this.upload.status = status;
+	}
+
+	// cropper properties
+	imageCropped(event: ImageCroppedEvent) {
+		this.croppedImage = event.base64 ?? null;
 	}
 }
