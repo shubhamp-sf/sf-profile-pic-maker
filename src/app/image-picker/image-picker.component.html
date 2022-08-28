@@ -9,6 +9,8 @@
 <ng-container *ngIf="imageFile !== null">
 	<div class="image-cropper-popup" (click)="closePopup($event)">
 		<div class="image-cropper-wrapper">
+			<h3>Crop Your Image to Keep the Best Portrait</h3>
+			<p>Click "Proceed" Once Done</p>
 			<image-cropper
 				[imageFile]="imageFile"
 				[maintainAspectRatio]="true"
